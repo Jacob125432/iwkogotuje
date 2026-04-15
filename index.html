@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>iwkogotuje.pl | Gotuj z Iwkiem</title>
+  <meta name="description" content="Gotuj z Iwkiem – proste, szybkie i smaczne przepisy, inspiracje kulinarne i domowe pomysły na każdy dzień." />
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #fff8f2;
+      color: #2d2d2d;
+      line-height: 1.6;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #f0d8ca;
+    }
+
+    .nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      color: #d34e24;
+      letter-spacing: 0.5px;
+    }
+
+    .menu {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: #444;
+      font-weight: 600;
+    }
+
+    .menu a:hover { color: #d34e24; }
+
+    .hero {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 48px 20px 32px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-size: 56px;
+      line-height: 1.05;
+      margin: 0 0 18px;
+      color: #1f1f1f;
+    }
+
+    .hero-text h1 span { color: #d34e24; }
+
+    .hero-text p {
+      font-size: 19px;
+      margin: 0 0 28px;
+      color: #5a5a5a;
+      max-width: 620px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 24px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: #d34e24;
+      color: white;
+      box-shadow: 0 10px 24px rgba(211, 78, 36, 0.24);
+    }
+
+    .btn-primary:hover { transform: translateY(-1px); }
+
+    .btn-secondary {
+      background: white;
+      color: #d34e24;
+      border: 2px solid #f1b49d;
+    }
+
+    .hero-card {
+      background: white;
+      padding: 18px;
+      border-radius: 28px;
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.12);
+      border: 1px solid #f4dfd3;
+    }
+
+    .hero-card img {
+      width: 100%;
+      display: block;
+      border-radius: 20px;
+      object-fit: cover;
+      max-height: 760px;
+    }
+
+    .badges {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .badge {
+      background: #fff4ed;
+      border: 1px solid #f5d4c6;
+      border-radius: 16px;
+      padding: 14px;
+      text-align: center;
+      font-weight: 700;
+      color: #7a3a22;
+    }
+
+    section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 20px 70px;
+    }
+
+    .section-title {
+      font-size: 34px;
+      margin: 0 0 10px;
+      color: #212121;
+    }
+
+    .section-subtitle {
+      margin: 0 0 28px;
+      color: #666;
+      font-size: 17px;
+      max-width: 760px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.08);
+      border: 1px solid #f1dfd5;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      font-size: 22px;
+      color: #d34e24;
+    }
+
+    .recipe-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .recipe {
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.08);
+      border: 1px solid #f1dfd5;
+    }
+
+    .recipe .cover {
+      height: 220px;
+      overflow: hidden;
+      background: #f7ece6;
+    }
+
+    .recipe .cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .recipe .content { padding: 22px; }
+
+    .meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .tag {
+      font-size: 13px;
+      font-weight: 700;
+      background: #fff0e8;
+      color: #a04b28;
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+
+    .recipe h3 { margin: 0 0 8px; }
+
+    .newsletter {
+      background: linear-gradient(135deg, #d34e24, #f08a5b);
+      color: white;
+      border-radius: 30px;
+      padding: 34px;
+      box-shadow: 0 18px 44px rgba(211, 78, 36, 0.24);
+    }
+
+    .newsletter form {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .newsletter input {
+      flex: 1 1 260px;
+      min-width: 0;
+      border: none;
+      border-radius: 14px;
+      padding: 14px 16px;
+      font-size: 16px;
+    }
+
+    .newsletter button {
+      border: none;
+      border-radius: 14px;
+      padding: 14px 22px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      background: #1f1f1f;
+      color: white;
+    }
+
+    footer {
+      padding: 28px 20px 50px;
+      text-align: center;
+      color: #666;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .cards,
+      .recipe-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-text h1 { font-size: 42px; }
+      .badges { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .hero-text h1 { font-size: 34px; }
+      .section-title { font-size: 28px; }
+      .nav { justify-content: center; }
+      .menu { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <nav class="nav">
+      <div class="logo">iwkogotuje.pl</div>
+      <div class="menu">
+        <a href="#start">Start</a>
+        <a href="#o-mnie">O stronie</a>
+        <a href="#przepisy">Przepisy</a>
+        <a href="#kontakt">Kontakt</a>
+      </div>
+    </nav>
+  </div>
+
+  <header class="hero" id="start">
+    <div class="hero-text">
+      <h1>GOTUJ <span>Z IWKIEM</span></h1>
+      <p>
+        Domowe gotowanie bez zbędnego komplikowania. Znajdziesz tu proste pomysły na śniadania,
+        obiady i szybkie przekąski, które wyglądają apetycznie i naprawdę smakują.
+      </p>
+      <div class="buttons">
+        <a href="#przepisy" class="btn btn-primary">Zobacz przepisy</a>
+        <a href="#kontakt" class="btn btn-secondary">Skontaktuj się</a>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <img src="6C124D46-E874-42A6-983E-F2F41A63FD1A.jpeg" alt="Śniadanie na talerzu" />
+      <div class="badges">
+        <div class="badge">Szybko</div>
+        <div class="badge">Smacznie</div>
+        <div class="badge">Domowo</div>
+      </div>
+    </div>
+  </header>
+
+  <section id="o-mnie">
+    <h2 class="section-title">O stronie</h2>
+    <p class="section-subtitle">
+      Ta strona została przygotowana jako nowoczesna wizytówka kulinarna. Możesz później dodać tu własne przepisy,
+      filmy, galerię zdjęć, link do Instagrama, TikToka albo formularz współpracy.
+    </p>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Proste przepisy</h3>
+        <p>Pomysły na codzienne jedzenie z łatwo dostępnych składników i bez zbędnego kombinowania.</p>
+      </div>
+      <div class="card">
+        <h3>Apetyczne zdjęcia</h3>
+        <p>Strona eksponuje Twoje zdjęcia jedzenia i może stać się bazą pod blog kulinarny lub markę osobistą.</p>
+      </div>
+      <div class="card">
+        <h3>Gotowa pod rozbudowę</h3>
+        <p>Możesz dodać kolejne sekcje, np. e-book, plan posiłków, współprace reklamowe albo newsletter.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="przepisy">
+    <h2 class="section-title">Inspiracje kulinarne</h2>
+    <p class="section-subtitle">
+      Na start dodałem przykładowe kafelki, które możesz później zamienić na swoje prawdziwe przepisy.
+    </p>
+
+    <div class="recipe-grid">
+      <article class="recipe">
+        <div class="cover">
+          <img src="6C124D46-E874-42A6-983E-F2F41A63FD1A.jpeg" alt="Śniadanie z jajkami" />
+        </div>
+        <div class="content">
+          <div class="meta">
+            <span class="tag">Śniadanie</span>
+            <span class="tag">15 min</span>
+          </div>
+          <h3>Jajka sadzone z pieczywem i sałatką</h3>
+          <p>Klasyczne śniadanie w domowym stylu: jajka, pieczywo, warzywa i prosty smak bez przesady.</p>
+        </div>
+      </article>
+
+      <article class="recipe">
+        <div class="cover">
+          <img src="6C124D46-E874-42A6-983E-F2F41A63FD1A.jpeg" alt="Szybki posiłek" />
+        </div>
+        <div class="content">
+          <div class="meta">
+            <span class="tag">Na szybko</span>
+            <span class="tag">Domowe</span>
+          </div>
+          <h3>Pomysł na prosty talerz śniadaniowy</h3>
+          <p>Idealna inspiracja na posiłek przed pracą, nauką albo nagrywaniem kolejnego kulinarnego filmu.</p>
+        </div>
+      </article>
+
+      <article class="recipe">
+        <div class="cover">
+          <img src="6C124D46-E874-42A6-983E-F2F41A63FD1A.jpeg" alt="Domowe śniadanie" />
+        </div>
+        <div class="content">
+          <div class="meta">
+            <span class="tag">Smacznie</span>
+            <span class="tag">Codziennie</span>
+          </div>
+          <h3>Gotuj prosto i apetycznie</h3>
+          <p>Strona może pokazywać Twoje podejście do jedzenia: bez spiny, estetycznie i naprawdę smacznie.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="kontakt">
+    <div class="newsletter">
+      <h2 style="margin-top:0; font-size: 34px;">Bądź na bieżąco z nowymi przepisami</h2>
+      <p style="margin-bottom:0; font-size: 18px; max-width: 760px;">
+        Tutaj możesz później podłączyć własny newsletter albo formularz kontaktowy. Na razie formularz jest poglądowy.
+      </p>
+      <form>
+        <input type="email" placeholder="Wpisz swój adres e-mail" />
+        <button type="submit">Dołącz</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 iwkogotuje.pl — GOTUJ Z IWKIEM
+  </footer>
+</body>
+</html>
